@@ -1,0 +1,13 @@
+.manageExpenses {
+    display: flex;
+    flex-direction: column;
+    width: 80rem;
+    margin: 3rem;
+}
+
+.manageExpenses__button {
+    width: 80rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 2rem;
+}
