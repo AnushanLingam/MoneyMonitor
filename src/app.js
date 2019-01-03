@@ -11,8 +11,8 @@ import LoadingPage from './components/LoadingPage';
 import numeral from 'numeral';
 
 import 'normalize.css/normalize.css';
-import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
+import './styles/styles.scss';
 
 const store = configureStore();
 require('numeral/locales/en-gb');

@@ -25,3 +25,41 @@ button:disabled {
     font-weight: bold;
 }
 
+.DateInput__display-text--focused {
+    background: $blue;
+    border-color: $blue;
+    border-radius: 3px;
+    color: white; 
+}
+
+.CalendarDay--selected-span {
+    background: $blue;
+    border: 1px double #3269c1;
+    color: #fff; }
+    .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
+      background: $blue;
+      border: 1px double #3269c1; }
+    .CalendarDay--selected-span.CalendarDay--last-in-range {
+      border-right: #3269c1; }
+  
+  .CalendarDay--hovered-span,
+  .CalendarDay--after-hovered-start {
+    background: $blue;
+    border: 1px double #3269c1;
+    color: white; }
+    .CalendarDay--hovered-span:active,
+    .CalendarDay--after-hovered-start:active {
+      background: $blue; 
+    }
+  
+  .CalendarDay--selected-start,
+  .CalendarDay--selected-end,
+  .CalendarDay--selected {
+    background: #3269c1;
+    border: 1px double #3269c1;
+    color: #fff; }
+    .CalendarDay--selected-start:active,
+    .CalendarDay--selected-end:active,
+    .CalendarDay--selected:active {
+      background: #3269c1; 
+    }

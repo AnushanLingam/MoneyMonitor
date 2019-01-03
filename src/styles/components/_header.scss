@@ -1,5 +1,11 @@
 .header {
-    background: $dark-blue;
+    background: #3269c1;
+    z-index: 1;
+    @media (min-width: $desktop-breakpoint) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
 }
 
 .header__title {
@@ -15,4 +21,5 @@
     justify-content: space-between;
     align-items: center;
     padding: $s-size 0;
+
 }
