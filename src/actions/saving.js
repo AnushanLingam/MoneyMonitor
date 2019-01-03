@@ -16,7 +16,6 @@ export const startSetSavings = () => {
                     ...childSnapshot.val()
                 });
             });
-            console.log(savings);
             dispatch(setSavings(savings));
 
         }).catch((e) => {
@@ -40,7 +39,6 @@ export const startAddSaving = (savingData = {}) => {
         const uid = getState().auth.uid;
 
         const saving = { title, goal, amount };
-        console.log(saving);
         return database.ref(`users/${uid}/savings`).push(saving).then((ref) => {
             dispatch(addSaving({
                 id: ref.key,
@@ -76,7 +74,6 @@ export const editSaving = (id, updates) => ({
 });
 
 export const startEditSaving = (id, updates) => {
-    console.log(id, updates)
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
         return database.ref(`users/${uid}/savings/${id}`).update({
