@@ -9,7 +9,7 @@ class ExpenseForm extends React.Component {
         super(props);
 
         this.state = {
-            title: props.expense ? props.expense.description : "",
+            title: props.expense ? props.expense.title : "",
             note: props.expense ? props.expense.note : "",
             amount: props.expense ? (props.expense.amount / 100).toString() : "",
             createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
@@ -100,7 +100,9 @@ class ExpenseForm extends React.Component {
 
                 <div>
                     {this.props.expense ? <button className="button">Save Expense</button> : <button className="button">Add Expense</button>}
+                    {this.props.expense && <button onClick={this.props.removeExpense} className="button">Delete</button>}
                 </div>
+               
             </form>
 
         );

@@ -11,7 +11,7 @@ const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     const store = createStore(
         combineReducers({
             auth: authReducer,
-            budget: budgetReducer,
+            expenses: budgetReducer,
             filters: filtersReducer
         }), 
         composeEnchancers(applyMiddleware(thunk))

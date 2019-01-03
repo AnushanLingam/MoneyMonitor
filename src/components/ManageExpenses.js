@@ -26,7 +26,7 @@ class ManageExpenses extends React.Component {
     
     render() {
         return (
-            <div className="manageExpenses">
+            <div className="content-container--alt">
                 <div className="manageExpenses__button"><button className="button--2" onClick={this.handleShowModal}>Add Expense</button></div>
                 <ExpenseFilters />
                 <AddExpenseModal showModal={this.state.showModal} hideModal={this.handleCloseModal}/>
