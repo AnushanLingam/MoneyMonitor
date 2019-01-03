@@ -8,28 +8,32 @@ class ManageExpenses extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            showModal: false
+            showExpenseModal: false
         };
     } 
     
-    handleCloseModal= () => {
+
+    
+    handleCloseExpenseModal= () => {
         this.setState({
-            showModal: false
+            showExpenseModal: false
         }) 
     }
 
-    handleShowModal = () => {
+    handleShowExpenseModal = () => {
         this.setState({
-            showModal: true
+            showExpenseModal: true
         });
     }
-    
+
     render() {
         return (
             <div className="content-container--alt">
-                <div className="manageExpenses__button"><button className="button--2" onClick={this.handleShowModal}>Add Expense</button></div>
+                <div className="manageExpenses__button">
+                    <button className="button--2" onClick={this.handleShowExpenseModal}>Add Expense</button>
+                </div>
                 <ExpenseFilters />
-                <AddExpenseModal showModal={this.state.showModal} hideModal={this.handleCloseModal}/>
+                <AddExpenseModal showModal={this.state.showExpenseModal} hideModal={this.handleCloseExpenseModal}/>
             </div>
         )
     }

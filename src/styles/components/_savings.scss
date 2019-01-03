@@ -1,0 +1,15 @@
+.saving__container {
+    width: 15rem;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.savings__container {
+    background: fade-out(white, .15);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem 0;
+}

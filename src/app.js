@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter, {history} from './routers/AppRouter';
+import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import {Provider} from 'react-redux';
-import {startSetExpenses} from './actions/budget';
+import { Provider } from 'react-redux';
+import { startSetExpenses } from './actions/budget';
+import { startSetSavings } from './actions/saving';
 import { firebase } from './firebase/firebase';
-import {login, logout} from './actions/auth';
-import LoadingPage from './components/LoadingPage';   
+import { login, logout } from './actions/auth';
+import LoadingPage from './components/LoadingPage';
 import numeral from 'numeral';
 
 import 'normalize.css/normalize.css';
@@ -19,13 +20,13 @@ numeral.locale("en-gb");
 
 
 const jsx = (
-   <Provider  store={store}>
-        <AppRouter />
+   <Provider store={store}>
+      <AppRouter />
    </Provider>
 );
 let hasRendered = false;
 const renderApp = () => {
-   if(!hasRendered) {
+   if (!hasRendered) {
       ReactDOM.render(jsx, document.getElementById("app"));
       hasRendered = true;
    }
@@ -37,16 +38,18 @@ ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 
 
 firebase.auth().onAuthStateChanged((user) => {
-   if(user) {
+   if (user) {
       store.dispatch(login(user.uid));
-      store.dispatch(startSetExpenses()).then( () => {
+      store.dispatch(startSetExpenses()).then(() => {
+         return store.dispatch(startSetSavings());
+      }).then(() => {
          renderApp();
-         if(history.location.pathname === "/") {
+         if (history.location.pathname === "/") {
             history.push("/dashboard")
          }
-       }).catch( (e) => {
-          console.log(e);
-       });
+      }).catch((e) => {
+         console.log(e);
+      });
    } else {
       store.dispatch(logout());
       renderApp();
