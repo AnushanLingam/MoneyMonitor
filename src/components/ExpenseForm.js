@@ -98,7 +98,7 @@ class ExpenseForm extends React.Component {
 
                 />
 
-                <div>
+                <div className="form__buttons">
                     {this.props.expense ? <button className="button">Save Expense</button> : <button className="button">Add Expense</button>}
                     {this.props.expense && <button onClick={this.props.removeExpense} className="button">Delete</button>}
                 </div>

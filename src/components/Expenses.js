@@ -1,35 +1,70 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ExpenseItem from './ExpenseItem';
 import selectExpenses from '../selectors/expenses';
 
-export const Expenses = (props) => (
-    <div className="content-container">
+import EditExpenseModal from './EditExpenseModal';
 
-        <div className="list-header">
-            <div className="show-for-mobile">Expenses</div>
-            <div className="show-for-desktop">Expense</div>
-            <div className="show-for-desktop">Amount</div>
-        </div>
+class Expenses extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showModal: false,
+            activeExpense: {},
+        };
+    } 
+    
+    handleCloseModal= () => {
+        this.setState({
+            showModal: false
+        }) 
+    }
 
-        <div className="list-body">
-            
-            {
-                props.expenses.length === 0 ? (
-                    <div className="list-item list-item--message">
-                        <span>No Expenses</span>
-                    </div>
-                ) : (
-                    props.expenses.map((expense) => {
-                        return <ExpenseItem key={expense.id} {...expense}/>
-                    })
-                )
-            }       
+    handleShowModal = () => {
+        this.setState({
+            showModal: true
+        });
+    }
 
-        </div>
+    handleEdit = (id) => {
+        const activeExpense = this.props.expenses.find(expense => expense.id === id);
+        this.setState({
+            activeExpense: activeExpense
+        });
+        this.handleShowModal();
+    }
 
-    </div>
-);
+    render() {
+        return (
+            <div className="content-container">
+
+                <div className="list-header">
+                    <div className="show-for-mobile">Expenses</div>
+                    <div className="show-for-desktop">Expense</div>
+                    <div className="show-for-desktop">Amount</div>
+                </div>
+
+                <div className="list-body">
+
+                    {
+                        this.props.expenses.length === 0 ? (
+                            <div className="list-item list-item--message">
+                                <span>No Expenses</span>
+                            </div>
+                        ) : (
+                                this.props.expenses.map((expense) => {
+                                    return <ExpenseItem editExpense={this.handleEdit} key={expense.id} {...expense} />
+                                })
+                            )
+                    }
+
+                </div>
+                <EditExpenseModal showModal={this.state.showModal} hideModal={this.handleCloseModal} id={this.state.activeExpense.id} expense={this.state.activeExpense} />
+
+            </div>
+        )
+    }
+}
 
 const mapStateToProps = (state) => {
     return {

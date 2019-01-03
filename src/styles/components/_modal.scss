@@ -40,3 +40,13 @@
     margin: 0 0 $l-size 0;
     word-break: break-all;
 }
+
+.modal__headers {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__title--2 {
+    color: black;
+}

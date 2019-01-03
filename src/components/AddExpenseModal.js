@@ -3,11 +3,11 @@ import Modal from 'react-modal';
 import ExpenseForm from './ExpenseForm';
 import { connect } from 'react-redux';
 import { startAddExpense } from '../actions/budget';
-import {history} from '../routers/AppRouter';
+import { history } from '../routers/AppRouter';
 
 class AddExpenseModal extends React.Component {
 
-    handleAddExpense= (expense) => {
+    handleAddExpense = (expense) => {
         this.props.startAddExpense(expense);
         history.push("/");
     }
@@ -22,7 +22,10 @@ class AddExpenseModal extends React.Component {
                 closeTimeoutMS={200}
                 className="modal"
             >
-                <h3 className="modal__title">Add Expense</h3>
+                <div className="form__buttons">
+                    <h3 className="modal__title--2">Add Expense</h3>
+                    <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
+                </div>
                 <ExpenseForm onSubmit={this.handleAddExpense} />
             </Modal>
         );
