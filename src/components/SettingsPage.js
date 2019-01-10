@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { startUpdateCurrency } from '../actions/settings';
 
 class SettingsPage extends React.Component {
-    
+
     changeCurrency = (e) => {
         const currency = e.target.value;
         this.props.startUpdateCurrency(currency);
@@ -17,15 +17,29 @@ class SettingsPage extends React.Component {
                 </div>
                 <div className="settings__option">
                     <h2>Currency</h2>
-                    <select  className="select" value={this.props.settings.currency} onChange={this.changeCurrency}>
+                    <select className="select" value={this.props.settings.currency} onChange={this.changeCurrency}>
                         <option key="en-gb" value="en-gb">Pound (£)</option>
                         <option key="en" value="en">Dollar ($)</option>
                         <option key="fr" value="fr">Euro (€)</option>
                     </select>
                 </div>
-                <div  className="settings__option--alt">
-                    <button className="button">Remove all Expenses</button>
-                    <button className="button">Remove all Savings</button>
+                <div className="summary__container">
+                    <h1 className="page-header__title">Manage Your Data</h1>
+                </div>
+                <div className="settings__option">
+                    <h2>Clear All Expenses</h2>
+                    <button className="button">Clear</button>
+                </div>
+                <div className="settings__option">
+                    <h2>Clear All Trackers</h2>
+                    <button className="button">Clear</button>
+                </div>
+                <div className="summary__container">
+                    <h1 className="page-header__title">Account Management</h1>
+                </div>
+                <div className="settings__option">
+                    <h2>Delete Account</h2>
+                    <button className="button">Delete</button>
                 </div>
             </div>
         );
