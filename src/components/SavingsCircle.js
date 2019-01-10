@@ -1,5 +1,6 @@
 import React from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
+import numeral from 'numeral'
 
 class SavingsCircle extends React.Component {
     
@@ -12,7 +13,7 @@ class SavingsCircle extends React.Component {
             <div className="saving__container" onClick={this.handleEdit}>
                 <CircularProgressbar
                     percentage={(this.props.amount / this.props.goal) * 100}
-                    text={`£${this.props.amount} / £${this.props.goal}`}
+                    text={`${numeral(this.props.amount).format("$0,0.[00]")} / ${numeral(this.props.goal).format("$0,0.[00]")}`}
                     strokeWidth={5}
                     styles={{
                         // Customize the root svg element
@@ -36,7 +37,7 @@ class SavingsCircle extends React.Component {
                             // Tweak text color:
                             fill: '#458bf9',
                             // Tweak text size:
-                            fontSize: '1.5rem',
+                            fontSize: '1.2rem',
                         },
                     }}
                 />

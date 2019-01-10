@@ -76,7 +76,7 @@ class ExpenseForm extends React.Component {
                 />
                 <input
                     type="number"
-                    placeholder="£ Amount"
+                    placeholder="Amount"
                     value={this.state.amount}
                     onChange={this.onAmountChange}
                     className="text-input"

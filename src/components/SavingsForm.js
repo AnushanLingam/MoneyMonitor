@@ -68,7 +68,7 @@ class SavingsForm extends React.Component {
                 />
                 <input
                     type="number"
-                    placeholder="£ Current Amount"
+                    placeholder="Current Amount"
                     value={this.state.amount}
                     onChange={this.onAmountChange}
                     className="text-input"
@@ -76,7 +76,7 @@ class SavingsForm extends React.Component {
 
                 <input
                     type="number"
-                    placeholder="£ Goal Amount"
+                    placeholder="Goal Amount"
                     value={this.state.goal}
                     onChange={this.onGoalChange}
                     className="text-input"

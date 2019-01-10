@@ -5,18 +5,17 @@ import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { startSetExpenses } from './actions/budget';
 import { startSetSavings } from './actions/saving';
+import { startSetCurrency } from './actions/settings';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
-import numeral from 'numeral';
-
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 
 const store = configureStore();
-require('numeral/locales/en-gb');
-numeral.locale("en-gb");
+
+
 
 
 const jsx = (
@@ -42,6 +41,8 @@ firebase.auth().onAuthStateChanged((user) => {
       store.dispatch(login(user.uid));
       store.dispatch(startSetExpenses()).then(() => {
          return store.dispatch(startSetSavings());
+      }).then(() => {
+         return store.dispatch(startSetCurrency());
       }).then(() => {
          renderApp();
          if (history.location.pathname === "/") {
