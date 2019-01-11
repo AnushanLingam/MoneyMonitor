@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import selectExpenses from '../selectors/expenses';
 import getTotalExpenses from '../selectors/expenses-total';
 import numeral from 'numeral';
-import SavingTarget from './SavingsCircle';
 import 'react-circular-progressbar/dist/styles.css';
+
+
 
 export const ExpenseSummary = (props) => {
     const expenseText = props.expenseCount === 1 ? "expense" : "expenses";
+    numeral.locale(props.currency);
     return (
         <div className="content-container">
             <div className="summary__container">
@@ -20,7 +22,8 @@ export const ExpenseSummary = (props) => {
 const mapStateToProps = (state) => {
     return {
         expenseCount: selectExpenses(state.expenses, state.filters).length,
-        expenseTotal: getTotalExpenses(selectExpenses(state.expenses, state.filters))
+        expenseTotal: getTotalExpenses(selectExpenses(state.expenses, state.filters)),
+        currency: state.settings.currency
     };
 };
 
