@@ -85,3 +85,14 @@ export const startEditSaving = (id, updates) => {
         });
     };
 };
+
+export const startRemoveAllSavings = () => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/savings`).remove().then( () => {
+            dispatch(setSavings([]));
+        }).catch( (e) => {
+            console.log(e);
+        });
+    };
+};

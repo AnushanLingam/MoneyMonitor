@@ -8,6 +8,11 @@
     display: inline-block;
     text-decoration: none;
     line-height: 1;
+
+}
+
+button:disabled {
+    background: grey;
 }
 
 .button--2 {

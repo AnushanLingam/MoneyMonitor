@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { history } from '../routers/AppRouter';
 
-export const Header = ({ startLogout }) => (
+export const Header = ({ startLogout, auth }) => (
     <header id="expenses" className={"header"}>
         <div className={"content-container"}>
             <div className={"header__content"}>
@@ -19,12 +19,11 @@ export const Header = ({ startLogout }) => (
                     </div>
                 }
 
+                {
+                    history.location.pathname != "/settings" &&
+                    <Link to="/settings"><img className="profilePicture" src={auth.photoURL} /></Link>
+                }
 
-
-                <div>
-                    <Link className="button--link button" to="/settings">Settings</Link>
-                    <button className="button--link button " onClick={startLogout}>Logout</button>
-                </div>
 
             </div>
         </div>
@@ -35,5 +34,8 @@ const mapDispatchToProps = (dispatch) => ({
     startLogout: () => dispatch(startLogout())
 })
 
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
 
-export default connect(undefined, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

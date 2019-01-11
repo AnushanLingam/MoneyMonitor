@@ -1,8 +1,58 @@
 import React from 'react';
+import WarningModal from './WarningModal';
 import { connect } from 'react-redux'
 import { startUpdateCurrency } from '../actions/settings';
+import { startRemoveAllExpenses } from '../actions/budget';
+import { startRemoveAllSavings } from '../actions/saving';
+import { startLogout } from '../actions/auth';
 
 class SettingsPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            expenseWarning: false,
+            savingsWarning: false
+        }
+    }
+
+    handleCloseExpenseModal = () => {
+        this.setState({
+            expenseWarning: false
+        });
+    }
+
+    handleShowExpenseModal = () => {
+        this.setState({
+            expenseWarning: true
+        });
+    }
+
+    handleCloseSavingsModal = () => {
+        this.setState({
+            savingsWarning: false
+        });
+    }
+
+    handleShowSavingsModal = () => {
+        this.setState({
+            savingsWarning: true
+        });
+    }
+
+    deleteAllExpenses = () => {
+        this.props.startRemoveAllExpenses();
+        this.setState({
+            expenseWarning: false
+        });
+    }
+
+    deleteAllSavings = () => {
+        this.props.startRemoveAllSavings();
+        this.setState({
+            savingsWarning: false
+        });
+    }
 
     changeCurrency = (e) => {
         const currency = e.target.value;
@@ -12,6 +62,13 @@ class SettingsPage extends React.Component {
     render() {
         return (
             <div className="content-container">
+                <div className="profileContainer">
+                    <div>
+                        <img className="profilePicture--alt" src={this.props.auth.photoURL} />
+                    </div>
+                    <h3 className="page-header__title profile__username">{this.props.auth.displayName}</h3>
+                    <button className="button" onClick={this.props.startLogout}>Logout</button>
+                </div>
                 <div className="summary__container">
                     <h1 className="page-header__title">Customise Preferences</h1>
                 </div>
@@ -28,30 +85,32 @@ class SettingsPage extends React.Component {
                 </div>
                 <div className="settings__option">
                     <h2>Clear All Expenses</h2>
-                    <button className="button">Clear</button>
+                    <button className="button" onClick={this.handleShowExpenseModal} disabled={this.props.expenses.length > 0 ? false : true}>Clear</button>
                 </div>
                 <div className="settings__option">
                     <h2>Clear All Trackers</h2>
-                    <button className="button">Clear</button>
+                    <button className="button" onClick={this.handleShowSavingsModal} disabled={this.props.savings.length > 0 ? false : true}>Clear</button>
                 </div>
-                <div className="summary__container">
-                    <h1 className="page-header__title">Account Management</h1>
-                </div>
-                <div className="settings__option">
-                    <h2>Delete Account</h2>
-                    <button className="button">Delete</button>
-                </div>
+                <WarningModal showModal={this.state.expenseWarning} deleteAll={this.deleteAllExpenses} hideModal={this.handleCloseExpenseModal} message="expenses" />
+                <WarningModal showModal={this.state.savingsWarning} deleteAll={this.deleteAllSavings} hideModal={this.handleCloseSavingsModal} message="trackers" />
+
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    settings: state.settings
+    settings: state.settings,
+    expenses: state.expenses,
+    savings: state.savings,
+    auth: state.auth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    startUpdateCurrency: (data) => dispatch(startUpdateCurrency(data))
+    startUpdateCurrency: (data) => dispatch(startUpdateCurrency(data)),
+    startRemoveAllExpenses: () => dispatch(startRemoveAllExpenses()),
+    startRemoveAllSavings: () => dispatch(startRemoveAllSavings()),
+    startLogout: () => dispatch(startLogout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

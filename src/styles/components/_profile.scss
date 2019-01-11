@@ -1,0 +1,35 @@
+.profilePicture {
+    width: 5rem;
+    border: 3px solid white;
+    border-radius: 50px;
+    height: auto;
+    display: inline-block;
+}
+
+.profilePicture:hover {
+    cursor: pointer;
+    border: 3px solid $blue;
+}
+
+.profilePicture--alt {
+    width: 5rem;
+    border: 3px solid white;
+    border-radius: 50px;
+    height: auto;
+    display: inline-block;
+    margin: 1px;
+}
+
+.profileContainer {
+    display: flex;
+    justify-content: center;
+    border: none;
+    border-bottom: 1px solid darken($off-white, 10%);
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.profile__username {
+    margin: 1rem;
+}

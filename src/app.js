@@ -38,7 +38,7 @@ ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 
 firebase.auth().onAuthStateChanged((user) => {
    if (user) {
-      store.dispatch(login(user.uid));
+      store.dispatch(login(user.uid, user.photoURL, user.displayName, user.email));
       store.dispatch(startSetExpenses()).then(() => {
          return store.dispatch(startSetSavings());
       }).then(() => {

@@ -87,3 +87,14 @@ export const startEditExpense = (id, updates) => {
         });
     };
 };
+
+export const startRemoveAllExpenses = () => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses`).remove().then( () => {
+            dispatch(setExpenses([]));
+        }).catch( (e) => {
+            console.log(e);
+        });
+    };
+};
