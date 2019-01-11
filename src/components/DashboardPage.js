@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Fade from 'react-reveal/Fade';
 import ManageExpenses from './ManageExpenses';
 import ManageSavings from './ManageSavings';
 import Expenses from './Expenses';
@@ -8,13 +8,15 @@ import Savings from './Savings';
 
 class DashboardPage extends React.Component {
     render() {
-        return(
+        return (
             <div className="content-container">
-                <ManageExpenses />
-                <ExpenseSummary />
-                <Expenses />
-                <ManageSavings />
-                <Savings />
+                <Fade>
+                    <ManageExpenses />
+                    <ExpenseSummary />
+                    <Expenses />
+                    <ManageSavings />
+                    <Savings />
+                </Fade>
             </div>
         );
     }
