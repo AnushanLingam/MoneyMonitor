@@ -24,6 +24,7 @@ export const startSetPreferences = () => {
             const childSnapshot = snapshot.child("userCategories");
             childSnapshot.forEach((category) => {
                 userCategories.push({
+                    id: category.key,
                     ...category.val()
                 });
             });
@@ -40,6 +41,32 @@ export const startUpdateCurrency = (currency) => {
         return database.ref(`users/${uid}/preferences/currency`).set(currency).then(() => {
             numeral.locale(currency);
             dispatch(setCurrency(currency));
+        }).catch((e) => {
+            console.log(e);
+        });
+    };  
+};
+
+export const addCategory = (category) => ({
+    type: "ADD_CATEGORY",
+    category
+})
+
+export const startAddCategory = (categoryData = {}) => {
+    return (dispatch, getState) => {
+        const {
+            name = ""
+        } = categoryData;
+        const uid = getState().auth.uid;
+
+        const category = {name};
+
+        return database.ref(`users/${uid}/preferences/userCategories`).push(category).then((ref) => {
+            dispatch(addCategory({
+                id: ref.key,
+                ...category
+            }));
+            console.log(ref.key)
         }).catch((e) => {
             console.log(e);
         });

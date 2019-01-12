@@ -39,6 +39,11 @@ export default (state = defaultSettingsState, action) => {
                 ...state,
                 userCategories: action.categories
             };
+        case "ADD_CATEGORY":
+            return {
+                ...state,
+                userCategories: [...state.userCategories, action.category]
+            };
         default:
             return state;
     };
