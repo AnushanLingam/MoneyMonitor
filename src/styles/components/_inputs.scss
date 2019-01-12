@@ -4,12 +4,19 @@
     padding: $s-size;
     font-size: $font-size-large;
     font-weight: 300;
+    width: 100%
 }
 
 .select {
     @extend .text-input;
-    width: 20rem;
+    @media (min-width: $desktop-breakpoint) {
+        width: 20rem;
+    }
 
+}
+
+.select--alt {
+    @extend .text-input;
 }
 
 .text-area {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import ExpenseForm from './ExpenseForm';
+import getCategories from '../selectors/categories';
 import { connect } from 'react-redux';
 import { startEditExpense, startRemoveExpense } from '../actions/budget';
 import { history } from '../routers/AppRouter';
@@ -32,12 +33,16 @@ class EditExpenseModal extends React.Component {
                     <h3 className="modal__title--2">Edit Expense</h3>
                     <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
-                <ExpenseForm expense={this.props.expense} removeExpense={this.handleDeleteExpense} onSubmit={this.handleEditExpense} />
+                <ExpenseForm expense={this.props.expense} categories={this.props.categories} removeExpense={this.handleDeleteExpense} onSubmit={this.handleEditExpense} />
 
             </Modal>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
+})
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -46,4 +51,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(undefined, mapDispatchToProps)(EditExpenseModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditExpenseModal);

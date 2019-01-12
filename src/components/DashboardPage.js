@@ -10,13 +10,16 @@ class DashboardPage extends React.Component {
     render() {
         return (
             <div className="content-container">
+
+                <ManageExpenses />
                 <Fade>
-                    <ManageExpenses />
                     <ExpenseSummary />
                     <Expenses />
                     <ManageSavings />
                     <Savings />
                 </Fade>
+
+
             </div>
         );
     }

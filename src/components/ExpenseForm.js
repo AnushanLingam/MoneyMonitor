@@ -14,6 +14,7 @@ class ExpenseForm extends React.Component {
             amount: props.expense ? (props.expense.amount / 100).toString() : "",
             createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
             focused: false,
+            category: props.expense? props.expense.category : "message",
             error: ""
         }
     }
@@ -36,6 +37,11 @@ class ExpenseForm extends React.Component {
         };
     };
 
+    onCategoryChange = (e) => {
+        const category = e.target.value;
+        this.setState(() => ({category}));
+    };
+
     onDateChange = (createdAt) => {
         this.setState(() => ({ createdAt }));
     };
@@ -43,6 +49,7 @@ class ExpenseForm extends React.Component {
     onFocusChange = ({ focused }) => {
         this.setState(() => ({ focused }))
     }
+
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -55,7 +62,8 @@ class ExpenseForm extends React.Component {
                 title: this.state.title,
                 amount: parseFloat(this.state.amount, 10) * 100,
                 createdAt: this.state.createdAt.valueOf(),
-                note: this.state.note
+                note: this.state.note,
+                category: this.state.category == "message" ? "" : this.state.category
             });
         }
 
@@ -90,6 +98,14 @@ class ExpenseForm extends React.Component {
                     isOutsideRange={() => false}
 
                 />
+                <select className="select--alt" value={this.state.category} onChange={this.onCategoryChange}>
+                    <option value="message" >Select a category (optional)</option>
+                    {
+                        this.props.categories.map((category) => {
+                            return <option key={category.name} value={category.name} >{category.name}</option>
+                        })
+                    }
+                </select>
                 <textarea
                     placeholder="Add a note about expense. (Optional)"
                     value={this.state.note}
@@ -102,7 +118,7 @@ class ExpenseForm extends React.Component {
                     {this.props.expense ? <button className="button">Save Expense</button> : <button className="button">Add Expense</button>}
                     {this.props.expense && <button onClick={this.props.removeExpense} className="button">Delete</button>}
                 </div>
-               
+
             </form>
 
         );

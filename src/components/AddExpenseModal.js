@@ -4,6 +4,7 @@ import ExpenseForm from './ExpenseForm';
 import { connect } from 'react-redux';
 import { startAddExpense } from '../actions/budget';
 import { history } from '../routers/AppRouter';
+import getCategories from '../selectors/categories';
 
 class AddExpenseModal extends React.Component {
 
@@ -26,11 +27,16 @@ class AddExpenseModal extends React.Component {
                     <h3 className="modal__title--2">Add Expense</h3>
                     <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
-                <ExpenseForm onSubmit={this.handleAddExpense} />
+                <ExpenseForm categories={this.props.categories} onSubmit={this.handleAddExpense} />
             </Modal>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
+})
+
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -38,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(undefined, mapDispatchToProps)(AddExpenseModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddExpenseModal);

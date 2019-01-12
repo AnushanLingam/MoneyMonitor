@@ -1,3 +1,4 @@
+
 export const setTextFilter = (text = "") => ({
     type: "SET_TEXT_FILTER",
     text
@@ -11,6 +12,10 @@ export const sortByDate = () => ({
     type: "SORT_BY_DATE"
 });
 
+export const sortByCategory = () => ({
+    type: "SORT_BY_CATEGORY"
+});
+
 export const setStartDate = (startDate) => ({
     type: "SET_START_DATE",
     startDate
@@ -19,4 +24,9 @@ export const setStartDate = (startDate) => ({
 export const setEndDate = (endDate) => ({
     type: "SET_END_DATE",
     endDate
+});
+
+export const setCategory = (category) => ({
+    type: "SET_CATEGORY",
+    category
 });

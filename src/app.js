@@ -5,7 +5,7 @@ import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { startSetExpenses } from './actions/budget';
 import { startSetSavings } from './actions/saving';
-import { startSetCurrency } from './actions/settings';
+import { startSetPreferences } from './actions/settings';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
@@ -42,7 +42,7 @@ firebase.auth().onAuthStateChanged((user) => {
       store.dispatch(startSetExpenses()).then(() => {
          return store.dispatch(startSetSavings());
       }).then(() => {
-         return store.dispatch(startSetCurrency());
+         return store.dispatch(startSetPreferences());
       }).then(() => {
          renderApp();
          if (history.location.pathname === "/") {

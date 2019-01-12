@@ -8,13 +8,26 @@ export const setCurrency = (currency) => ({
     currency
 });
 
-export const startSetCurrency = () => {
+export const setCategories = (categories) => ({
+    type: "SET_USER_CATEGORIES",
+    categories
+});
+
+export const startSetPreferences = () => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        return database.ref(`users/${uid}/preferences/currency`).once("value").then( (snapshot) => {
-            const currency = snapshot.val() || "en-gb";
+        return database.ref(`users/${uid}/preferences`).once("value").then( (snapshot) => {
+            const currency = snapshot.child("currency").val() || "en-gb";
             numeral.locale(currency);
             dispatch(setCurrency(currency));
+            const userCategories = []
+            const childSnapshot = snapshot.child("userCategories");
+            childSnapshot.forEach((category) => {
+                userCategories.push({
+                    ...category.val()
+                });
+            });
+            dispatch(setCategories(userCategories));
         }).catch( (e) => {
             console.log(e);
         });

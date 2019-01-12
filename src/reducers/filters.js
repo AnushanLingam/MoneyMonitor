@@ -5,7 +5,8 @@ const filtersDefaultState = {
     text: "",
     sortBy: "date",
     startDate: moment().startOf("month"),
-    endDate: moment().endOf("month")
+    endDate: moment().endOf("month"),
+    category: ""
 };
 
 export default (state = filtersDefaultState, action) => {
@@ -25,6 +26,11 @@ export default (state = filtersDefaultState, action) => {
                 ...state,
                 sortBy: "date"
             };
+        case "SORT_BY_CATEGORY": 
+            return {
+                ...state, 
+                sortBy: "category"
+            }
         case "SET_START_DATE":
             return {
                 ...state,
@@ -34,6 +40,11 @@ export default (state = filtersDefaultState, action) => {
             return {
                 ...state,
                 endDate: action.endDate
+            };
+        case "SET_CATEGORY": 
+            return {
+                ...state,
+                category: action.category
             };
         default:
             return state;

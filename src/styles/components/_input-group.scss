@@ -1,11 +1,11 @@
 .input-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: $m-size;
     flex-direction: column;
     @media (min-width: $desktop-breakpoint) {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         margin-bottom: $l-size;
     }
 }
@@ -15,5 +15,12 @@
     
     @media (min-width: $desktop-breakpoint) {
         margin-bottom: 0;
+    }
+}
+
+.input-group__item-home {
+    @media (min-width: $desktop-breakpoint) {
+        display: flex;
+        justify-content: center
     }
 }

@@ -36,7 +36,7 @@ class Expenses extends React.Component {
 
     render() {
         return (
-            <div className="content-container">
+            <div className="content-container--alt">
 
                 <div className="list-header">
                     <div className="show-for-mobile">Expenses</div>
