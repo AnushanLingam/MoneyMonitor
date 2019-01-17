@@ -5,11 +5,13 @@ class CategoryModal extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(this.props.category)
         this.state = {
-            name: ""
+            name: this.props.category ? this.props.category.name : "",
         }
     }
 
+    // BREAK OUT FORM TO COMPONENT?
     onNameChange = (e) => {
         const name = e.target.value;
         this.setState({
@@ -21,7 +23,8 @@ class CategoryModal extends React.Component {
         e.preventDefault();
         if(this.state.name !== "") {
             this.props.submitAction({
-                name: this.state.name
+                name: this.state.name,
+                id: this.props.category ? this.props.category.id : ""
             })
         }
         this.setState({
@@ -34,6 +37,7 @@ class CategoryModal extends React.Component {
     }
 
     render() {
+
         return (
             <Modal
                 isOpen={this.props.showModal}
@@ -44,12 +48,13 @@ class CategoryModal extends React.Component {
                 className="modal"
             >
                 <h2 className="modal__title--2">{this.props.message} Category</h2>
+                
                 <form className="form" onSubmit={this.handleOnSubmit}>
                     <input
                         type="text"
                         placeholder="Category Name"
                         autoFocus
-                        value={this.props.category ? this.props.category.name : this.state.name}
+                        value={this.state.name}
                         onChange={this.onNameChange}
                         className="text-input"
                     />

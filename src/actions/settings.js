@@ -66,9 +66,14 @@ export const startAddCategory = (categoryData = {}) => {
                 id: ref.key,
                 ...category
             }));
-            console.log(ref.key)
         }).catch((e) => {
             console.log(e);
         });
     };  
 };
+
+export const startEditCategory = (categoryData ={}) => {
+    return (dispatch, getState) => {
+        
+    }
+}

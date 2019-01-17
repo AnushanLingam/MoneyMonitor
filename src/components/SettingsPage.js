@@ -60,7 +60,8 @@ class SettingsPage extends React.Component {
 
     handleCloseAddCategoryModal = () => {
         this.setState({
-            addCategoryModal: false
+            addCategoryModal: false,
+            selectedCategory: ""
         });
     };
     
@@ -72,7 +73,8 @@ class SettingsPage extends React.Component {
 
     handleCloseEditCategoryModal = () => {
         this.setState({
-            editCategoryModal: false
+            editCategoryModal: false,
+            selectedCategory: ""
         });
     };
 
@@ -98,11 +100,17 @@ class SettingsPage extends React.Component {
     addCategory = (category) => {
         this.props.startAddCategory(category);
         this.handleCloseAddCategoryModal();
+        this.setState({
+            selectedCategory: ""
+        })
     }
 
     editCategory = (category) => {
         console.log("Editing Category");
         this.handleCloseEditCategoryModal();
+        this.setState({
+            selectedCategory: ""
+        })
     }
 
     removeCategory = (category) => {
@@ -116,7 +124,7 @@ class SettingsPage extends React.Component {
     render() {
         return (
             <div className="content-container">
-                <Fade>
+                
                     <div className="profileContainer">
                         <div>
                             <img className="profilePicture--alt" src={this.props.auth.photoURL} />
@@ -170,8 +178,10 @@ class SettingsPage extends React.Component {
                     <WarningModal showModal={this.state.expenseWarning} deleteAll={this.deleteAllExpenses} hideModal={this.handleCloseExpenseModal} message="expenses" />
                     <WarningModal showModal={this.state.savingsWarning} deleteAll={this.deleteAllSavings} hideModal={this.handleCloseSavingsModal} message="trackers" />
                     <CategoryModal showModal={this.state.addCategoryModal} submitAction={this.addCategory} hideModal={this.handleCloseAddCategoryModal} message="Add"/>
-                    <CategoryModal category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit"/>
-                </Fade>
+                    {this.state.selectedCategory !== "" && 
+                        <CategoryModal category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit"/>
+                    }
+  
 
             </div>
         );
