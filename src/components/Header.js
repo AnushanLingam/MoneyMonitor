@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { history } from '../routers/AppRouter';
 
-export const Header = ({ startLogout, auth }) => (
+export const Header = ({ auth }) => (
     <header id="expenses" className={"header"}>
         <div className={"content-container"}>
             <div className={"header__content"}>
@@ -25,17 +25,15 @@ export const Header = ({ startLogout, auth }) => (
                 }
 
 
+
+
             </div>
         </div>
     </header>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout())
-})
-
 const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

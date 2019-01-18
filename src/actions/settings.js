@@ -3,6 +3,8 @@ import numeral from 'numeral';
 require('numeral/locales/en-gb');
 require('numeral/locales/fr');
 
+import { startEditExpense, startSetExpenses } from './budget'
+
 export const setCurrency = (currency) => ({
     type: "SET_CURRENCY",
     currency
@@ -72,8 +74,54 @@ export const startAddCategory = (categoryData = {}) => {
     };  
 };
 
-export const startEditCategory = (categoryData ={}) => {
+export const editCategory = (id, updates) => ({
+    type: "EDIT_CATEGORY",
+    id,
+    updates
+})
+
+export const startEditCategory = (id, updates) => {
     return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/preferences/userCategories/${id}`).update({
+            ...updates
+        }).then( () => {
+            dispatch(editCategory(id, updates));
+        }).catch( (e) => {
+            console.log(e);
+        });
+    }
+}
+
+export const removeCategory = (id) => ({
+    type: "REMOVE_CATEGORY",
+    id
+});
+
+export const startRemoveCategory = (id) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        const expenses = getState().expenses;
         
+        const newExpenses = expenses.filter((expense) => expense.category === id);
+        const aysncStartEdit = async (expenseId, updates) => {
+            return await dispatch(startEditExpense(expenseId, updates));
+        } 
+
+        const updateAll = async (expenseObjects) => {
+            return await Promise.all(expenseObjects.map((expense) => {
+                aysncStartEdit(expense.id, {category: ""});
+            }))
+        };
+
+        updateAll(newExpenses).then(() => {
+            return database.ref(`users/${uid}/preferences/userCategories/${id}`).remove().then( () => {
+                return dispatch(removeCategory(id));
+            }).then(() => {
+                dispatch(startSetExpenses());
+            }).catch( (e) => {
+                console.log(e);
+            }); 
+        });
     }
 }

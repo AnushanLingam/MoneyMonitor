@@ -1,23 +1,28 @@
 // Default Categories
 
 const bills = {
-    name: "Bills"
+    name: "Bills",
+    id: "1"
 }
 
 const rent = {
-    name: "Rent"
+    name: "Rent",
+    id: "2"
 }
 
 const food = {
-    name: "Food"
+    name: "Food",
+    id: "3"
 }
 
 const leisure = {
-    name: "Leisure"
+    name: "Leisure",
+    id: "4"
 }
 
 const debt = {
-    name: "Debt"
+    name: "Debt",
+    id: "5"
 }
 
 
@@ -44,6 +49,25 @@ export default (state = defaultSettingsState, action) => {
                 ...state,
                 userCategories: [...state.userCategories, action.category]
             };
+        case "EDIT_CATEGORY":
+                return {
+                    ...state,
+                    userCategories: state.userCategories.map((category) => {
+                        if(category.id === action.id) {
+                            return{
+                                ...category,
+                                ...action.updates
+                            };
+                        } else {
+                            return category;
+                        }
+                    })
+                }
+        case "REMOVE_CATEGORY": 
+                return {
+                    ...state,
+                    userCategories: state.userCategories.filter((category) => category.id !== action.id)
+                };
         default:
             return state;
     };

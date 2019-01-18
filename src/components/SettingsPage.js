@@ -3,7 +3,7 @@ import WarningModal from './WarningModal';
 import CategoryModal from './CategoryModal';
 import Fade from 'react-reveal/Fade';
 import { connect } from 'react-redux'
-import { startUpdateCurrency, startAddCategory } from '../actions/settings';
+import { startUpdateCurrency, startAddCategory, startEditCategory, startRemoveCategory } from '../actions/settings';
 import { startRemoveAllExpenses } from '../actions/budget';
 import { startRemoveAllSavings } from '../actions/saving';
 import { startLogout } from '../actions/auth';
@@ -106,19 +106,13 @@ class SettingsPage extends React.Component {
     }
 
     editCategory = (category) => {
-        console.log("Editing Category");
-        this.handleCloseEditCategoryModal();
-        this.setState({
-            selectedCategory: ""
-        })
+        this.props.startEditCategory(category.id, {name: category.name})
+        this.handleCloseEditCategoryModal()
     }
 
     removeCategory = (category) => {
-        console.log("Removed!");
-        // To Do
-        // Loop Through all expenses and clear the category field that matches the removed category
-        // Save the updated expenses
-        // Remove the category
+        this.props.startRemoveCategory(category.id);
+        this.handleCloseEditCategoryModal()
     }
 
     render() {
@@ -200,7 +194,9 @@ const mapDispatchToProps = (dispatch) => ({
     startRemoveAllExpenses: () => dispatch(startRemoveAllExpenses()),
     startRemoveAllSavings: () => dispatch(startRemoveAllSavings()),
     startLogout: () => dispatch(startLogout()),
-    startAddCategory: (category) => dispatch(startAddCategory(category))
+    startAddCategory: (category) => dispatch(startAddCategory(category)),
+    startEditCategory: (id, updates) => dispatch(startEditCategory(id, updates)),
+    startRemoveCategory: (id) => dispatch(startRemoveCategory(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

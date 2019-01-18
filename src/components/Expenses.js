@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseItem from './ExpenseItem';
 import selectExpenses from '../selectors/expenses';
+import getCategories from '../selectors/categories'
 
 import EditExpenseModal from './EditExpenseModal';
 
@@ -53,13 +54,13 @@ class Expenses extends React.Component {
                             </div>
                         ) : (
                                 this.props.expenses.map((expense) => {
-                                    return <ExpenseItem editExpense={this.handleEdit} key={expense.id} {...expense} />
+                                    return <ExpenseItem editExpense={this.handleEdit} key={expense.id} {...expense} category={this.props.categories.find(category => category.id === expense.category)} />
                                 })
                             )
                     }
 
                 </div>
-                <EditExpenseModal showModal={this.state.showModal} hideModal={this.handleCloseModal} id={this.state.activeExpense.id} expense={this.state.activeExpense} />
+                <EditExpenseModal  showModal={this.state.showModal} hideModal={this.handleCloseModal} id={this.state.activeExpense.id} expense={this.state.activeExpense} />
 
             </div>
         )
@@ -68,7 +69,8 @@ class Expenses extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        expenses: selectExpenses(state.expenses, state.filters)
+        expenses: selectExpenses(state.expenses, state.filters),
+        categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
     };
 }
 

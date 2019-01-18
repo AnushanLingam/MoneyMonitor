@@ -102,7 +102,7 @@ class ExpenseForm extends React.Component {
                     <option value="message" >Select a category (optional)</option>
                     {
                         this.props.categories.map((category) => {
-                            return <option key={category.name} value={category.name} >{category.name}</option>
+                            return <option key={category.name} value={category.id} >{category.name}</option>
                         })
                     }
                 </select>

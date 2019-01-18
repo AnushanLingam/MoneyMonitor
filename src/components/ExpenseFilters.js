@@ -58,7 +58,7 @@ export class ExpenseFilters extends React.Component {
                             <option value="">All Categories</option>
                             {
                                 this.props.categories.map((category) => {
-                                    return <option key={category.name} value={category.name} >{category.name}</option>
+                                    return <option key={category.name} value={category.id} >{category.name}</option>
                                 })
                             }
                         </select>

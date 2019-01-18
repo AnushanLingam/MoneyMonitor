@@ -5,7 +5,6 @@ class CategoryModal extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.category)
         this.state = {
             name: this.props.category ? this.props.category.name : "",
         }

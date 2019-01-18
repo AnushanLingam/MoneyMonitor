@@ -6,7 +6,9 @@ import Expenses from './Expenses';
 import ExpenseSummary from './ExpenseSummary';
 import Savings from './Savings';
 
+
 class DashboardPage extends React.Component {
+       
     render() {
         return (
             <div className="content-container">

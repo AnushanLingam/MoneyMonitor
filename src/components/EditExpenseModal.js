@@ -9,7 +9,6 @@ import { history } from '../routers/AppRouter';
 class EditExpenseModal extends React.Component {
 
     handleEditExpense = (expense) => {
-        console.log(this.props.id, expense);
         this.props.startEditExpense(this.props.id, expense);
         history.push("/");
     }
