@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { history } from '../routers/AppRouter';
 
-export const Header = ({ auth }) => (
-    <header id="expenses" className={"header"}>
+export const Header = ({ auth, theme }) => (
+    <header id="expenses" className={theme === "dark" ? "header--dark" : "header"}>
         <div className={"content-container"}>
             <div className={"header__content"}>
                 <Link className={"header__title"} to="/dashboard"><h1>Money Monitor</h1></Link>
@@ -33,7 +33,8 @@ export const Header = ({ auth }) => (
 );
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
+    theme: state.settings.theme
 });
 
 export default connect(mapStateToProps)(Header);

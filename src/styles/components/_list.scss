@@ -29,6 +29,14 @@
     }
 }
 
+.list-item__dark {
+    @extend .list-item;
+    color: white;
+    &:hover {
+        background: grey;
+    }
+}
+
 .list-item--message {
     align-items: center;
     justify-content: center;
@@ -47,6 +55,11 @@
 .list-item__subtitle {
     color: $grey;
     font-size: 1.4rem;
+}
+
+.list_item__subtitle--dark {
+    @extend .list-item__subtitle;
+    color: $darktheme-altGrey;
 }
 
 .list-item__data {

@@ -29,7 +29,8 @@ const debt = {
 const defaultSettingsState = {
     currency: "en-gb",
     defaultCategories: [bills, rent, food, leisure, debt],
-    userCategories: []
+    userCategories: [],
+    theme: "light"
 }
 
 export default (state = defaultSettingsState, action) => {
@@ -68,6 +69,11 @@ export default (state = defaultSettingsState, action) => {
                     ...state,
                     userCategories: state.userCategories.filter((category) => category.id !== action.id)
                 };
+        case "SET_THEME":
+                return {
+                    ...state,
+                    theme: action.theme
+                }
         default:
             return state;
     };

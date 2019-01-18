@@ -10,9 +10,9 @@ export const PrivateRoute = ({
 }) => (
     <Route {...rest} component={(props) => (
         isAuthenticated ? (
-            <div>
+            <div style={props.theme === "dark" ? {background: "black"} : {background: 'white'}}>
                 <Header />
-                <Component {...props}/>
+                <Component {...props} theme={props.theme}/>
             </div>
 
         ) : (
@@ -22,7 +22,8 @@ export const PrivateRoute = ({
 );
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.auth.uid 
+    isAuthenticated: !!state.auth.uid,
+    theme: state.settings.theme 
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

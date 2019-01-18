@@ -3,7 +3,7 @@ import WarningModal from './WarningModal';
 import CategoryModal from './CategoryModal';
 import Fade from 'react-reveal/Fade';
 import { connect } from 'react-redux'
-import { startUpdateCurrency, startAddCategory, startEditCategory, startRemoveCategory } from '../actions/settings';
+import { startUpdateCurrency, startAddCategory, startEditCategory, startRemoveCategory, startSetTheme } from '../actions/settings';
 import { startRemoveAllExpenses } from '../actions/budget';
 import { startRemoveAllSavings } from '../actions/saving';
 import { startLogout } from '../actions/auth';
@@ -64,7 +64,7 @@ class SettingsPage extends React.Component {
             selectedCategory: ""
         });
     };
-    
+
     handleShowEditCategoryModal = () => {
         this.setState({
             editCategoryModal: true
@@ -97,6 +97,11 @@ class SettingsPage extends React.Component {
         this.props.startUpdateCurrency(currency);
     }
 
+    changeTheme = (e) => {
+        const theme = e.target.value;
+        this.props.startSetTheme(theme, window);
+    }
+
     addCategory = (category) => {
         this.props.startAddCategory(category);
         this.handleCloseAddCategoryModal();
@@ -106,7 +111,7 @@ class SettingsPage extends React.Component {
     }
 
     editCategory = (category) => {
-        this.props.startEditCategory(category.id, {name: category.name})
+        this.props.startEditCategory(category.id, { name: category.name })
         this.handleCloseEditCategoryModal()
     }
 
@@ -117,8 +122,9 @@ class SettingsPage extends React.Component {
 
     render() {
         return (
-            <div className="content-container">
-                
+            <div className={this.props.settings.theme === "dark" ? "mainBackground--dark darkText" : "mainBackground"}>
+                <div className="content-container">
+
                     <div className="profileContainer">
                         <div>
                             <img className="profilePicture--alt" src={this.props.auth.photoURL} />
@@ -158,6 +164,13 @@ class SettingsPage extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className="settings__option">
+                        <h2>Theme</h2>
+                        <select className="select" value={this.props.settings.theme} onChange={this.changeTheme}>
+                            <option key="light" value="light">Light</option>
+                            <option key="dark" value="dark">Dark</option>
+                        </select>
+                    </div>
                     <div className="summary__container">
                         <h1 className="page-header__title">Manage Your Data</h1>
                     </div>
@@ -171,12 +184,13 @@ class SettingsPage extends React.Component {
                     </div>
                     <WarningModal showModal={this.state.expenseWarning} deleteAll={this.deleteAllExpenses} hideModal={this.handleCloseExpenseModal} message="expenses" />
                     <WarningModal showModal={this.state.savingsWarning} deleteAll={this.deleteAllSavings} hideModal={this.handleCloseSavingsModal} message="trackers" />
-                    <CategoryModal showModal={this.state.addCategoryModal} submitAction={this.addCategory} hideModal={this.handleCloseAddCategoryModal} message="Add"/>
-                    {this.state.selectedCategory !== "" && 
-                        <CategoryModal category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit"/>
+                    <CategoryModal showModal={this.state.addCategoryModal} submitAction={this.addCategory} hideModal={this.handleCloseAddCategoryModal} message="Add" />
+                    {this.state.selectedCategory !== "" &&
+                        <CategoryModal category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit" />
                     }
-  
 
+
+                </div>
             </div>
         );
     }
@@ -196,7 +210,8 @@ const mapDispatchToProps = (dispatch) => ({
     startLogout: () => dispatch(startLogout()),
     startAddCategory: (category) => dispatch(startAddCategory(category)),
     startEditCategory: (id, updates) => dispatch(startEditCategory(id, updates)),
-    startRemoveCategory: (id) => dispatch(startRemoveCategory(id))
+    startRemoveCategory: (id) => dispatch(startRemoveCategory(id)),
+    startSetTheme: (theme, w) => dispatch(startSetTheme(theme, w))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

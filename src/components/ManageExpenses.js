@@ -4,20 +4,20 @@ import AddExpenseModal from './AddExpenseModal';
 import ExpenseFilters from './ExpenseFilters';
 
 class ManageExpenses extends React.Component {
-    
-    constructor(props){
+
+    constructor(props) {
         super(props);
         this.state = {
             showExpenseModal: false
         };
-    } 
-    
+    }
 
-    
-    handleCloseExpenseModal= () => {
+
+
+    handleCloseExpenseModal = () => {
         this.setState({
             showExpenseModal: false
-        }) 
+        })
     }
 
     handleShowExpenseModal = () => {
@@ -28,12 +28,15 @@ class ManageExpenses extends React.Component {
 
     render() {
         return (
-            <div className="content-container--alt">
-                <div className="manageExpenses__button">
-                    <button className="button--2" onClick={this.handleShowExpenseModal}>Add Expense</button>
+            <div className="content-container--alt2">
+                <div className="content-container--top">
+                    <div className="manageExpenses__button">
+                        <button className="button--2" onClick={this.handleShowExpenseModal}>Add Expense</button>
+                    </div>
                 </div>
+
                 <ExpenseFilters />
-                <AddExpenseModal showModal={this.state.showExpenseModal} hideModal={this.handleCloseExpenseModal}/>
+                <AddExpenseModal showModal={this.state.showExpenseModal} hideModal={this.handleCloseExpenseModal} />
             </div>
         )
     }

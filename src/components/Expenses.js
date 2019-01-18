@@ -54,7 +54,7 @@ class Expenses extends React.Component {
                             </div>
                         ) : (
                                 this.props.expenses.map((expense) => {
-                                    return <ExpenseItem editExpense={this.handleEdit} key={expense.id} {...expense} category={this.props.categories.find(category => category.id === expense.category)} />
+                                    return <ExpenseItem theme={this.props.theme} editExpense={this.handleEdit} key={expense.id} {...expense} category={this.props.categories.find(category => category.id === expense.category)} />
                                 })
                             )
                     }
@@ -70,7 +70,8 @@ class Expenses extends React.Component {
 const mapStateToProps = (state) => {
     return {
         expenses: selectExpenses(state.expenses, state.filters),
-        categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
+        categories: getCategories(state.settings.defaultCategories, state.settings.userCategories),
+        theme: state.settings.theme
     };
 }
 

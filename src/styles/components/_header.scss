@@ -8,6 +8,11 @@
     }
 }
 
+.header--dark {
+    @extend .header;
+    background: $darktheme-blue
+}
+
 .header__title {
     color: white;
     text-decoration: none;

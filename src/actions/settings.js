@@ -22,6 +22,9 @@ export const startSetPreferences = () => {
             const currency = snapshot.child("currency").val() || "en-gb";
             numeral.locale(currency);
             dispatch(setCurrency(currency));
+            const theme = snapshot.child("theme").val() || "light";
+            console.log(theme)
+            dispatch(setTheme(theme));
             const userCategories = []
             const childSnapshot = snapshot.child("userCategories");
             childSnapshot.forEach((category) => {
@@ -122,6 +125,23 @@ export const startRemoveCategory = (id) => {
             }).catch( (e) => {
                 console.log(e);
             }); 
+        });
+    }
+}
+
+export const setTheme = (theme) => ({
+    type: "SET_THEME",
+    theme
+});
+
+export const startSetTheme = (theme, window) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        
+        return database.ref(`users/${uid}/preferences/theme`).set(theme).then(() => {
+            window.location.reload();
+        }).catch((e) => {
+            console.log(e);
         });
     }
 }

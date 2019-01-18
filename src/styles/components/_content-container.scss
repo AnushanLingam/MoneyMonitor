@@ -13,3 +13,25 @@
         padding: 0 $m-size;
     }
 }
+
+.content-container--alt2 {
+    margin: 0;
+    max-width: 90rem;
+    padding: 0 0.1rem;
+
+    @media (min-width: $desktop-breakpoint) {
+        padding: 0 $m-size;
+    }
+}
+.content-container--top {
+    max-width: 90rem;
+    padding: 0.1rem;
+
+    @media (min-width: $desktop-breakpoint) {
+        padding: $m-size;
+    }
+}
+
+.darkText {
+    color: white
+}
