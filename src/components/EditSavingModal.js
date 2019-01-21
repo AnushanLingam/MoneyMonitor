@@ -33,7 +33,7 @@ class EditSavingModal extends React.Component {
             >
                 <div className="form__buttons">
                     <h3 className="modal__title--2">Add Saving Goal</h3>
-                    <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
+                    <button className=" button--3 button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
                 <SavingsForm saving={this.props.saving} removeSaving={this.handleDeleteSaving} onSubmit={this.handleEditSaving} />
             </Modal>

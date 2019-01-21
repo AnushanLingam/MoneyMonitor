@@ -2,12 +2,13 @@
     background: $blue;
     color: white;
     border: none;
-    padding: $s-size;
+    padding: 0.5rem;
     font-weight: 300;
     font-size: $font-size-large;
     display: inline-block;
     text-decoration: none;
     line-height: 1;
+    height: 3rem;
 
 }
 
@@ -26,6 +27,20 @@ button:disabled {
     text-decoration: none;
     line-height: 1;
     width: 100%;
+    margin: 0.1em
+}
+
+.button--3 {
+    background: $blue;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    font-weight: 300;
+    font-size: $font-size-large;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+
 }
 
 .button--link {

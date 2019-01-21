@@ -30,7 +30,7 @@ class EditExpenseModal extends React.Component {
             >
                 <div className="form__buttons">
                     <h3 className="modal__title--2">Edit Expense</h3>
-                    <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
+                    <button className=" button--3 button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
                 <ExpenseForm expense={this.props.expense} categories={this.props.categories} removeExpense={this.handleDeleteExpense} onSubmit={this.handleEditExpense} />
 

@@ -34,7 +34,7 @@ class AddExpenseModal extends React.Component {
             >
                 <div className="form__buttons">
                     <h3 className="modal__title--2">Add Expense</h3>
-                    <button className=" button button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
+                    <button className=" button--3 button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
                 <ExpenseForm theme={this.props.theme} categories={this.props.categories} onSubmit={this.handleAddExpense} />
                 
