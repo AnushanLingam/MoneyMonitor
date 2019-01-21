@@ -29,41 +29,52 @@ button:disabled {
     font-weight: bold;
 }
 
-.DateInput__display-text--focused {
-    background: $blue;
-    border-color: $blue;
-    border-radius: 3px;
-    color: white; 
+.react-date-picker__inputGroup__input {
+    min-width: 0.54em;
+    height: 100%;
+    position: relative;
+    padding: 0 1px;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    box-sizing: content-box;
+    -moz-appearance: textfield;
 }
 
-.CalendarDay--selected-span {
-    background: $blue;
-    border: 1px double #3269c1;
-    color: #fff; }
-    .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
-      background: $blue;
-      border: 1px double #3269c1; }
-    .CalendarDay--selected-span.CalendarDay--last-in-range {
-      border-right: #3269c1; }
-  
-  .CalendarDay--hovered-span,
-  .CalendarDay--after-hovered-start {
-    background: $blue;
-    border: 1px double #3269c1;
-    color: white; }
-    .CalendarDay--hovered-span:active,
-    .CalendarDay--after-hovered-start:active {
-      background: $blue; 
-    }
-  
-  .CalendarDay--selected-start,
-  .CalendarDay--selected-end,
-  .CalendarDay--selected {
-    background: #3269c1;
-    border: 1px double #3269c1;
-    color: #fff; }
-    .CalendarDay--selected-start:active,
-    .CalendarDay--selected-end:active,
-    .CalendarDay--selected:active {
-      background: #3269c1; 
-    }
+.react-calender {
+    width: 350px;
+    max-width: 100%;
+    border: 1px solid #a0a096;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}
+
+.calender-dark {
+    background: $darktheme-altGrey;
+}
+
+.react-calendar__tile {
+    max-width: 100%;
+    text-align: center;
+    padding: 0.75em 0.5em;
+    background: none;
+    color: inherit;
+}
+
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    color: inherit;
+}
+
+.react-daterange-picker__inputGroup__input {
+    min-width: 0.54em;
+    position: relative;
+    border: 0;
+    color: inherit;
+    background: none;
+    font: inherit;
+    box-sizing: content-box;
+    -moz-appearance: textfield;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
-
+import DatePicker from 'react-date-picker'
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
 class ExpenseForm extends React.Component {
 
@@ -12,9 +12,9 @@ class ExpenseForm extends React.Component {
             title: props.expense ? props.expense.title : "",
             note: props.expense ? props.expense.note : "",
             amount: props.expense ? (props.expense.amount / 100).toString() : "",
-            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+            createdAt: props.expense ? moment(props.expense.createdAt).toDate() : moment().toDate(),
             focused: false,
-            category: props.expense? props.expense.category : "message",
+            category: props.expense ? props.expense.category : "message",
             error: ""
         }
     }
@@ -39,7 +39,7 @@ class ExpenseForm extends React.Component {
 
     onCategoryChange = (e) => {
         const category = e.target.value;
-        this.setState(() => ({category}));
+        this.setState(() => ({ category }));
     };
 
     onDateChange = (createdAt) => {
@@ -89,15 +89,13 @@ class ExpenseForm extends React.Component {
                     onChange={this.onAmountChange}
                     className="text-input"
                 />
-                <SingleDatePicker
-                    date={this.state.createdAt}
-                    onDateChange={this.onDateChange}
-                    focused={this.state.focused}
-                    onFocusChange={this.onFocusChange}
-                    numberOfMonths={1}
-                    isOutsideRange={() => false}
-
-                />
+                <div>
+                    <DatePicker
+                        value={this.state.createdAt}
+                        onChange={this.onDateChange}
+                        calendarClassName={this.props.theme === "dark" ? "calender-dark" : ""}
+                    />
+                </div>
                 <select className="select--alt" value={this.state.category} onChange={this.onCategoryChange}>
                     <option value="message" >Select a category (optional)</option>
                     {

@@ -24,7 +24,6 @@
 
 .modal {
     background: $off-white;
-    color: white;
     max-width: 80rem;
     width: 60rem;
     outline: none;
@@ -37,6 +36,7 @@
 .modal--dark {
     @extend .modal;
     background: $darktheme-grey;
+    color: white;
     border: 2px solid darken($darktheme-grey, 10%);
 }
 

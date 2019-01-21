@@ -15,6 +15,7 @@
     "watch": "nodemon --watch src/ --exec \"npm run launch\""
   },
   "dependencies": {
+    "@wojtekmaj/react-daterange-picker": "^2.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "7",
@@ -38,6 +39,7 @@
     "react": "16.0.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-circular-progressbar": "^1.0.0",
+    "react-date-picker": "^7.2.0",
     "react-dates": "12.7.0",
     "react-dom": "16.0.0",
     "react-modal": "^3.8.1",

@@ -1,20 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTextFilter, sortByAmount, sortByDate, sortByCategory, setStartDate, setEndDate, setCategory } from '../actions/filters';
-import { DateRangePicker } from 'react-dates';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import getCategories from '../selectors/categories';
-
+import moment from 'moment';
 
 export class ExpenseFilters extends React.Component {
 
     state = {
-        calenderFocused: null
+        calenderFocused: null,
+        date: [moment(this.props.filters.startDate).toDate(), moment(this.props.filters.endDate).toDate()]
     };
 
     onDatesChange = ({ startDate, endDate }) => {
         this.props.setStartDate(startDate);
         this.props.setEndDate(endDate);
     };
+
+    onCalenderChange = (date) => {
+        this.setState({ date }, this.onDatesChange({
+            startDate: date ? moment(date[0]) : null,
+            endDate: date? moment(date[1]) : null
+        }))
+    }
 
     onFocusChange = (calenderFocused) => {
         this.setState(() => ({ calenderFocused }));
@@ -68,14 +76,11 @@ export class ExpenseFilters extends React.Component {
                 <div className="input-group ">
                     <div className="input-group__item input-group__item-home">
                         <DateRangePicker
-                            startDate={this.props.filters.startDate}
-                            endDate={this.props.filters.endDate}
-                            onDatesChange={this.onDatesChange}
-                            focusedInput={this.state.calenderFocused}
-                            onFocusChange={this.onFocusChange}
-                            numberOfMonths={1}
-                            isOutsideRange={() => false}
-                            showClearDates={true}
+                            onChange={this.onCalenderChange}
+                            value={this.state.date}
+                            calendarClassName={this.props.theme === "dark" ? "calender-dark" : ""}
+                            calenderType="ISO 8601"
+                            
                         />
                     </div>
                 </div>
@@ -89,7 +94,8 @@ export class ExpenseFilters extends React.Component {
 const mapStateToProps = (state) => {
     return {
         filters: state.filters,
-        categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
+        categories: getCategories(state.settings.defaultCategories, state.settings.userCategories),
+        theme: state.settings.theme
     };
 };
 
@@ -106,4 +112,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseFilters);
-
