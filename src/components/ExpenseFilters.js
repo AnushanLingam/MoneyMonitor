@@ -22,7 +22,7 @@ export class ExpenseFilters extends React.Component {
     onCalenderChange = (date) => {
         this.setState({ date }, this.onDatesChange({
             startDate: date ? moment(date[0]) : null,
-            endDate: date? moment(date[1]) : null
+            endDate: date ? moment(date[1]) : null
         }))
     }
 
@@ -75,17 +75,19 @@ export class ExpenseFilters extends React.Component {
                     </div>
                 </div>
 
-                <div className="input-group ">
-                    <div className={this.props.theme === "dark" ? "input-group__item--dark input-group__item--home" : "input-group__item input-group__item--home"}>
-                        <DateRangePicker
-                            onChange={this.onCalenderChange}
-                            value={this.state.date}
-                            clearIcon={<DatePickerCancel theme={this.props.theme}/>}
-                            calendarClassName={this.props.theme === "dark" ? "calender-dark" : ""}
-                            calenderType="ISO 8601"
-                            className={this.props.theme === "dark" ? "calender-background" : "calender-background--light"}
-                            calendarIcon={<DatePickerCalender theme={this.props.theme}/>}
-                        />
+                <div className="datepicker-container">
+                    <div className="input-group ">
+                        <div className={this.props.theme === "dark" ? "input-group__item--dark input-group__item--home" : "input-group__item input-group__item--home"}>
+                            <DateRangePicker
+                                onChange={this.onCalenderChange}
+                                value={this.state.date}
+                                clearIcon={<DatePickerCancel theme={this.props.theme} />}
+                                calendarClassName={this.props.theme === "dark" ? "calender-dark" : ""}
+                                calenderType="ISO 8601"
+                                className={this.props.theme === "dark" ? "calender-background" : "calender-background--light"}
+                                calendarIcon={<DatePickerCalender theme={this.props.theme} />}
+                            />
+                        </div>
                     </div>
                 </div>
 

@@ -10,3 +10,12 @@
     justify-content: space-around;
     padding: 0 2rem;
 }
+
+.datepicker-container {
+
+    @media (max-width: $desktop-breakpoint) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;    
+    }
+}

@@ -23,7 +23,6 @@ export const startSetPreferences = () => {
             numeral.locale(currency);
             dispatch(setCurrency(currency));
             const theme = snapshot.child("theme").val() || "light";
-            console.log(theme)
             dispatch(setTheme(theme));
             const userCategories = []
             const childSnapshot = snapshot.child("userCategories");

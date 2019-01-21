@@ -18,9 +18,13 @@
     margin: 0;
     max-width: 90rem;
     padding: 0 0.1rem;
-
     @media (min-width: $desktop-breakpoint) {
         padding: 0 $m-size;
+    }
+
+    @media(max-width: $desktop-breakpoint) {
+        display: flex;
+        flex-direction: column;
     }
 }
 .content-container--top {
