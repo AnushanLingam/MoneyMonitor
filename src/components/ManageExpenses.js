@@ -31,7 +31,7 @@ class ManageExpenses extends React.Component {
             <div className="content-container--alt2">
                 <div className="content-container--top">
                     <div className="manageExpenses__button">
-                        <button className="button--2" onClick={this.handleShowExpenseModal}>Add Expense</button>
+                        <button className={this.props.theme === "dark" ? "button--2--dark" : "button--2"} onClick={this.handleShowExpenseModal}>Add Expense</button>
                     </div>
                 </div>
 

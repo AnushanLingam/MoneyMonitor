@@ -14,8 +14,8 @@ export const Header = ({ auth, theme }) => (
                 {
                     history.location.pathname == "/dashboard" &&
                     <div className="show-for-desktop">
-                        <a className="button--link button " href="#expenses">Expenses</a>
-                        <a className="button--link button " href="#savings-tracker">Savings</a>
+                        <a className="button--link button--header" href="#expenses">Expenses</a>
+                        <a className="button--link button--header" href="#savings-tracker">Savings</a>
                     </div>
                 }
 

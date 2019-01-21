@@ -15,4 +15,11 @@
 .form__buttons {
     display: flex;
     justify-content: space-between;
+    color: black;
+}
+
+.form__buttons--dark {
+    display: flex;
+    justify-content: space-between;
+    color: white;
 }

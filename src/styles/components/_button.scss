@@ -12,6 +12,23 @@
 
 }
 
+.button--header {
+    background: $blue;
+    color: white;
+    border: none;
+    padding: 1.2rem;
+    font-weight: 300;
+    font-size: $font-size-large;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.button--dark {
+    @extend .button;
+    background: #1d4268;
+}
+
 button:disabled {
     background: grey;
 }
@@ -28,6 +45,11 @@ button:disabled {
     line-height: 1;
     width: 100%;
     margin: 0.1em
+}
+
+.button--2--dark {
+    @extend .button--2;
+    background: #1d4268;
 }
 
 .button--3 {
@@ -48,7 +70,7 @@ button:disabled {
 }
 
 .button--modal {
-    color: black;
+    color: inherit;
 }
 
 .button--secondary  {

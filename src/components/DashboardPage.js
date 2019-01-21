@@ -15,11 +15,11 @@ class DashboardPage extends React.Component {
             <div className={this.props.theme === "dark" ? "mainBackground--dark darkText" : "mainBackground"} >
                 <div className="content-container">
 
-                    <ManageExpenses />
+                    <ManageExpenses theme={this.props.theme} />
                     <Fade>
                         <ExpenseSummary />
                         <Expenses />
-                        <ManageSavings />
+                        <ManageSavings theme={this.props.theme} />
                         <Savings />
                     </Fade>
 

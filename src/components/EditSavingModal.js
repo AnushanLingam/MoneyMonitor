@@ -29,17 +29,21 @@ class EditSavingModal extends React.Component {
                 appElement={document.getElementById("app")}
                 onRequestClose={this.props.hideModal}
                 closeTimeoutMS={200}
-                className="modal"
+                className={this.props.theme === "dark" ? "modal--dark" : "modal"}
             >
-                <div className="form__buttons">
+                <div className={this.props.theme === "dark" ? "form__buttons--dark" : "form__buttons"}>
                     <h3 className="modal__title--2">Add Saving Goal</h3>
                     <button className=" button--3 button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
-                <SavingsForm saving={this.props.saving} removeSaving={this.handleDeleteSaving} onSubmit={this.handleEditSaving} />
+                <SavingsForm theme={this.props.theme} saving={this.props.saving} removeSaving={this.handleDeleteSaving} onSubmit={this.handleEditSaving} />
             </Modal>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    theme: state.settings.theme
+})
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -48,4 +52,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(undefined, mapDispatchToProps)(EditSavingModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditSavingModal);

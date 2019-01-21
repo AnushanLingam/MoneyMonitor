@@ -7,11 +7,17 @@
     padding: $s-size $m-size;
 }
 
+.list-header--dark {
+    @extend .list-header;
+    color: white;
+    background: $darktheme-blue;
+}
+
 .list-item {
     display: flex;
     flex-direction: column;
     border-top: none;
-    border: 1px solid darken($off-white, 7%);
+    border-bottom: 1px solid #e5e5e5;
     color: $dark-grey;
     cursor: pointer;
     padding: $s-size;
@@ -32,8 +38,10 @@
 .list-item__dark {
     @extend .list-item;
     color: white;
+    background: #32373e;
+    border-bottom: 1px solid #88939d;
     &:hover {
-        background: grey;
+        background: #292b2d;
     }
 }
 

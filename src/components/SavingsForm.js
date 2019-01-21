@@ -83,8 +83,8 @@ class SavingsForm extends React.Component {
                 />
 
                 <div className="form__buttons">
-                    {this.props.saving ? <button className="button--2">Save Tracker</button> : <button className="button--2">Add Tracker</button>}
-                    {this.props.saving && <button onClick={this.props.removeSaving} className="button--2">Delete</button>}
+                    {this.props.saving ? <button className={this.props.theme === "dark" ? "button--2--dark" : "button--2"}>Save Tracker</button> : <button className={this.props.theme === "dark" ? "button--2--dark" : "button--2"}>Add Tracker</button>}
+                    {this.props.saving && <button onClick={this.props.removeSaving} className={this.props.theme === "dark" ? "button--2--dark" : "button--2"}>Delete</button>}
                 </div>
 
             </form>

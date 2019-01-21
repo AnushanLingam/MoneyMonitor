@@ -18,9 +18,26 @@
     }
 }
 
-.input-group__item-home {
+.input-group__item--dark {
+    margin-bottom: $s-size;
+    background: $darktheme-grey;
+    @media (min-width: $desktop-breakpoint) {
+        margin-bottom: 0;
+    }
+}
+
+.input-group__item--home {
     @media (min-width: $desktop-breakpoint) {
         display: flex;
         justify-content: center
     }
+}
+
+.input__doubleline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-container {
+    margin: 0 0 0 1rem;
 }

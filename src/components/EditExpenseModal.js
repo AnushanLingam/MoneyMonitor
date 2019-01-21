@@ -26,13 +26,13 @@ class EditExpenseModal extends React.Component {
                 appElement={document.getElementById("app")}
                 onRequestClose={this.props.hideModal}
                 closeTimeoutMS={200}
-                className="modal"
+                className={this.props.theme === "dark" ? "modal--dark" : "modal"}
             >
-                <div className="form__buttons">
+                <div className={this.props.theme === "dark" ? "form__buttons--dark" : "form__buttons"}>
                     <h3 className="modal__title--2">Edit Expense</h3>
                     <button className=" button--3 button--link button--modal" onClick={this.props.hideModal} >Cancel</button>
                 </div>
-                <ExpenseForm expense={this.props.expense} categories={this.props.categories} removeExpense={this.handleDeleteExpense} onSubmit={this.handleEditExpense} />
+                <ExpenseForm theme={this.props.theme} expense={this.props.expense} categories={this.props.categories} removeExpense={this.handleDeleteExpense} onSubmit={this.handleEditExpense} />
 
             </Modal>
         );
@@ -40,7 +40,8 @@ class EditExpenseModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    categories: getCategories(state.settings.defaultCategories, state.settings.userCategories)
+    categories: getCategories(state.settings.defaultCategories, state.settings.userCategories),
+    theme: state.settings.theme
 })
 
 const mapDispatchToProps = (dispatch) => {

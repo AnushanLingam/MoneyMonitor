@@ -121,6 +121,7 @@ class SettingsPage extends React.Component {
     }
 
     render() {
+
         return (
             <div className={this.props.settings.theme === "dark" ? "mainBackground--dark darkText" : "mainBackground"}>
                 <div className="content-container">
@@ -130,63 +131,69 @@ class SettingsPage extends React.Component {
                             <img className="profilePicture--alt" src={this.props.auth.photoURL} />
                         </div>
                         <h3 className="page-header__title profile__username">{this.props.auth.displayName}</h3>
-                        <button className="button" onClick={this.props.startLogout}>Logout</button>
+                        <button className={this.props.settings.theme === "dark" ? "button--dark" : "button"} onClick={this.props.startLogout}>Logout</button>
                     </div>
                     <div className="summary__container">
                         <h1 className="page-header__title">Customise Preferences</h1>
                     </div>
                     <div className="settings__option">
                         <h2>Currency</h2>
-                        <select className="select" value={this.props.settings.currency} onChange={this.changeCurrency}>
-                            <option key="en-gb" value="en-gb">Pound (£)</option>
-                            <option key="en" value="en">Dollar ($)</option>
-                            <option key="fr" value="fr">Euro (€)</option>
-                        </select>
+                        <div className={this.props.settings.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
+                            <select className="select" value={this.props.settings.currency} onChange={this.changeCurrency}>
+                                <option key="en-gb" value="en-gb">Pound (£)</option>
+                                <option key="en" value="en">Dollar ($)</option>
+                                <option key="fr" value="fr">Euro (€)</option>
+                            </select>
+                        </div>
                     </div>
                     <div className="settings__option">
                         <h2>Categories</h2>
                         <div className="settings__category-container">
                             <div className="settings__category-option">
-                                <button className="button" onClick={this.handleShowAddCategoryModal}>Add Category</button>
+                                <button className={this.props.settings.theme === "dark" ? "button--dark" : "button"} onClick={this.handleShowAddCategoryModal}>Add Category</button>
                             </div>
                             <div className="settings__category-option">
-                                <select className="select--alt" value={this.state.selectedCategory} onChange={this.handleChangeCategory}>
-                                    <option value="">Select Category to Edit</option>
-                                    {
-                                        this.props.settings.userCategories.map((category) => {
-                                            return <option key={category.name} value={category.name} >{category.name}</option>
-                                        })
-                                    }
-                                </select>
+                                <div className={this.props.settings.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
+                                    <select className="select--alt" value={this.state.selectedCategory} onChange={this.handleChangeCategory}>
+                                        <option value="">Select Category to Edit</option>
+                                        {
+                                            this.props.settings.userCategories.map((category) => {
+                                                return <option key={category.name} value={category.name} >{category.name}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
                             </div>
                             <div className="settings__category-option">
-                                <button className="button" disabled={this.props.settings.userCategories.length > 0 && this.state.selectedCategory !== "" ? false : true} onClick={this.handleShowEditCategoryModal}>Edit Category</button>
+                                <button className={this.props.settings.theme === "dark" ? "button--dark" : "button"} disabled={this.props.settings.userCategories.length > 0 && this.state.selectedCategory !== "" ? false : true} onClick={this.handleShowEditCategoryModal}>Edit Category</button>
                             </div>
                         </div>
                     </div>
                     <div className="settings__option">
                         <h2>Theme</h2>
-                        <select className="select" value={this.props.settings.theme} onChange={this.changeTheme}>
-                            <option key="light" value="light">Light</option>
-                            <option key="dark" value="dark">Dark</option>
-                        </select>
+                        <div className={this.props.settings.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
+                            <select className="select" value={this.props.settings.theme} onChange={this.changeTheme}>
+                                <option key="light" value="light">Light</option>
+                                <option key="dark" value="dark">Dark</option>
+                            </select>
+                        </div>
                     </div>
                     <div className="summary__container">
                         <h1 className="page-header__title">Manage Your Data</h1>
                     </div>
                     <div className="settings__option">
                         <h2>Clear All Expenses</h2>
-                        <button className="button" onClick={this.handleShowExpenseModal} disabled={this.props.expenses.length > 0 ? false : true}>Clear</button>
+                        <button className={this.props.settings.theme === "dark" ? "button--dark" : "button"} onClick={this.handleShowExpenseModal} disabled={this.props.expenses.length > 0 ? false : true}>Clear</button>
                     </div>
                     <div className="settings__option">
                         <h2>Clear All Trackers</h2>
-                        <button className="button" onClick={this.handleShowSavingsModal} disabled={this.props.savings.length > 0 ? false : true}>Clear</button>
+                        <button className={this.props.settings.theme === "dark" ? "button--dark" : "button"} onClick={this.handleShowSavingsModal} disabled={this.props.savings.length > 0 ? false : true}>Clear</button>
                     </div>
-                    <WarningModal showModal={this.state.expenseWarning} deleteAll={this.deleteAllExpenses} hideModal={this.handleCloseExpenseModal} message="expenses" />
-                    <WarningModal showModal={this.state.savingsWarning} deleteAll={this.deleteAllSavings} hideModal={this.handleCloseSavingsModal} message="trackers" />
-                    <CategoryModal showModal={this.state.addCategoryModal} submitAction={this.addCategory} hideModal={this.handleCloseAddCategoryModal} message="Add" />
+                    <WarningModal theme={this.props.settings.theme} showModal={this.state.expenseWarning} deleteAll={this.deleteAllExpenses} hideModal={this.handleCloseExpenseModal} message="expenses" />
+                    <WarningModal theme={this.props.settings.theme} showModal={this.state.savingsWarning} deleteAll={this.deleteAllSavings} hideModal={this.handleCloseSavingsModal} message="trackers" />
+                    <CategoryModal theme={this.props.settings.theme} showModal={this.state.addCategoryModal} submitAction={this.addCategory} hideModal={this.handleCloseAddCategoryModal} message="Add" />
                     {this.state.selectedCategory !== "" &&
-                        <CategoryModal category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit" />
+                        <CategoryModal theme={this.props.settings.theme} category={this.props.settings.userCategories.find(category => category.name === this.state.selectedCategory)} showModal={this.state.editCategoryModal} removeCategory={this.removeCategory} submitAction={this.editCategory} hideModal={this.handleCloseEditCategoryModal} message="Edit" />
                     }
 
 

@@ -39,7 +39,7 @@ class Expenses extends React.Component {
         return (
             <div className="content-container--alt">
 
-                <div className="list-header">
+                <div className={this.props.theme === "dark" ? "list-header--dark" :"list-header"}>
                     <div className="show-for-mobile">Expenses</div>
                     <div className="show-for-desktop">Expense</div>
                     <div className="show-for-desktop">Amount</div>

@@ -4,6 +4,8 @@ import { setTextFilter, sortByAmount, sortByDate, sortByCategory, setStartDate, 
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import getCategories from '../selectors/categories';
 import moment from 'moment';
+import DatePickerCancel from './DatePickerCancel';
+import DatePickerCalender from './DatePickerCalender';
 
 export class ExpenseFilters extends React.Component {
 
@@ -51,17 +53,17 @@ export class ExpenseFilters extends React.Component {
         return (
             <div className="content-container--alt">
                 <div className="input-group">
-                    <div className="input-group__item">
+                    <div className={this.props.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
                         <input className="text-input" type="text" placeholder="Search Expenses" value={this.props.filters.text} onChange={this.onTextChange} />
                     </div>
-                    <div className="input-group__item">
+                    <div className={this.props.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
                         <select className="select" value={this.props.filters.sortBy} onChange={this.onSortChange}>
                             <option value="date">Date</option>
                             <option value="amount">Amount</option>
                             <option value="category">Category</option>
                         </select>
                     </div>
-                    <div className="input-group__item">
+                    <div className={this.props.theme === "dark" ? "input-group__item--dark" : "input-group__item"}>
                         <select className="select" value={this.props.filters.category} onChange={this.onCategoryChange}>
                             <option value="">All Categories</option>
                             {
@@ -74,13 +76,15 @@ export class ExpenseFilters extends React.Component {
                 </div>
 
                 <div className="input-group ">
-                    <div className="input-group__item input-group__item-home">
+                    <div className={this.props.theme === "dark" ? "input-group__item--dark input-group__item--home" : "input-group__item input-group__item--home"}>
                         <DateRangePicker
                             onChange={this.onCalenderChange}
                             value={this.state.date}
+                            clearIcon={<DatePickerCancel theme={this.props.theme}/>}
                             calendarClassName={this.props.theme === "dark" ? "calender-dark" : ""}
                             calenderType="ISO 8601"
-                            
+                            className={this.props.theme === "dark" ? "calender-background" : "calender-background--light"}
+                            calendarIcon={<DatePickerCalender theme={this.props.theme}/>}
                         />
                     </div>
                 </div>

@@ -27,7 +27,7 @@ class ManageSavings extends React.Component {
         return (
             <div className="content-container--alt">
                 <div className="manageExpenses__button">
-                    <button className="button--2" onClick={this.handleShowSavingModal}>Add Saving Tracker</button>
+                    <button className={this.props.theme === "dark" ? "button--2--dark" : "button--2"} onClick={this.handleShowSavingModal}>Add Saving Tracker</button>
                 </div>
                 <AddSavingModal showModal={this.state.showSavingModal} hideModal={this.handleCloseSavingModal}/>
             </div>
