@@ -90,15 +90,6 @@ class ExpenseForm extends React.Component {
                 />
 
                 <div className={this.props.theme === "dark" ? "input-group__item--dark input__doubleline" : "input-group__item input__doubleline"}>
-                    <select className="select--alt" value={this.state.category} onChange={this.onCategoryChange}>
-                        <option value="message" >Select a category (optional)</option>
-                        {
-                            this.props.categories.map((category) => {
-                                return <option key={category.name} value={category.id} >{category.name}</option>
-                            })
-                        }
-                    </select>
-
                     <div className="date-container">
                         <DatePicker
                             calendarIcon={null}
@@ -109,6 +100,15 @@ class ExpenseForm extends React.Component {
 
                         />
                     </div>
+
+                    <select className="select--alt" value={this.state.category} onChange={this.onCategoryChange}>
+                        <option value="message" >Select a category (optional)</option>
+                        {
+                            this.props.categories.map((category) => {
+                                return <option key={category.name} value={category.id} >{category.name}</option>
+                            })
+                        }
+                    </select>
                 </div>
                 <textarea
                     placeholder="Add a note about expense. (Optional)"
